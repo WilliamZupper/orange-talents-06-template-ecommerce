@@ -10,4 +10,7 @@ public class MercadolivreApplication {
 		SpringApplication.run(MercadolivreApplication.class, args);
 	}
 
+
+
+
 }
