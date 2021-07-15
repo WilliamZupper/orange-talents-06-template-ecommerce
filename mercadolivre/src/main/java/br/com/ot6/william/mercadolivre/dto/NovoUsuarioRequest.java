@@ -2,7 +2,6 @@ package br.com.ot6.william.mercadolivre.dto;
 
 
 import br.com.ot6.william.mercadolivre.modelo.Usuario;
-import br.com.ot6.william.mercadolivre.validacao.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -12,9 +11,8 @@ import javax.validation.constraints.Size;
 
 public class NovoUsuarioRequest {
 
-    @Email
-     @JsonProperty("login")
-     @UniqueValue(Classe = Usuario.class, campo = "login")
+    @Email(message = "O login deve estar no formato de email")
+    @JsonProperty("login")
     @NotBlank
     private String login;
 
@@ -26,5 +24,9 @@ public class NovoUsuarioRequest {
     public Usuario toModel(){
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
         return new Usuario(login, encoder.encode(senha));
+    }
+
+    public String getLogin() {
+        return login;
     }
 }

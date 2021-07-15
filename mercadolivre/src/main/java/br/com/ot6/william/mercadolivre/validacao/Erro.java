@@ -1,12 +1,12 @@
 package br.com.ot6.william.mercadolivre.validacao;
 
-public class ErroNovoAutorRequest {
+public class Erro {
 
     private String campo;
     private String erro;
 
 
-    public ErroNovoAutorRequest(String campo, String erro) {
+    public Erro(String campo, String erro) {
         this.campo = campo;
         this.erro = erro;
     }

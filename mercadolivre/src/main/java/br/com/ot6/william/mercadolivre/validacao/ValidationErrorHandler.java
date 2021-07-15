@@ -21,13 +21,13 @@ public class ValidationErrorHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ErroNovoAutorRequest> handle(MethodArgumentNotValidException exception) {
-        List<ErroNovoAutorRequest> dto = new ArrayList<>();
+    public List<Erro> handle(MethodArgumentNotValidException exception) {
+        List<Erro> dto = new ArrayList<>();
 
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
         fieldErrors.forEach(e -> {
             String mensagem = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            ErroNovoAutorRequest erro = new ErroNovoAutorRequest(e.getField(), mensagem);
+            Erro erro = new Erro(e.getField(), mensagem);
             dto.add(erro);
         });
 
