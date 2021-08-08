@@ -1,5 +1,6 @@
 package br.com.ot6.william.mercadolivre.controller;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import br.com.ot6.william.mercadolivre.config.TokenDto;
@@ -28,6 +29,7 @@ public class AutenticacaoController {
     private TokenService tokenService;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid AutenticacaoRequest form) {
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 

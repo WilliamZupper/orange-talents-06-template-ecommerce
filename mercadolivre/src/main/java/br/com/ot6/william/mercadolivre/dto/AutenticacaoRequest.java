@@ -2,20 +2,17 @@ package br.com.ot6.william.mercadolivre.dto;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import javax.validation.constraints.NotBlank;
+
 public class AutenticacaoRequest {
 
-     private String nome;
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String senha;
 
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getEmail() {
         return email;

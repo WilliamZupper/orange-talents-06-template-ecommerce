@@ -1,6 +1,7 @@
 package br.com.ot6.william.mercadolivre.modelo;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Email;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -27,9 +29,22 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String senha;
 
+    private LocalDateTime dataCriacao = LocalDateTime.now();
+
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfis = new ArrayList<>();
+
+
+    public Usuario() {
+    }
+
+
+    public Usuario(String email, String senhaLimpa) {
+        this.email = email;
+        this.senha = new BCryptPasswordEncoder().encode(senhaLimpa);
+    }
 
 
     @Override
@@ -98,4 +113,15 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
 }
